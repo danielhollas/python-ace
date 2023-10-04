@@ -12,8 +12,6 @@ from threading import Lock
 from concurrent.futures import Executor
 from concurrent.futures import ProcessPoolExecutor
 
-import pandas as pd
-
 # very random name to avoid global namespace collision
 LOCAL_DATAFRAME_VARIALBE_NAME = "dh3ah3k5sk3n9v62m3l2"
 
@@ -61,6 +59,7 @@ def local_dataframe_initializer(df):
 
 
 def batch_function_wrapper(batch_indices, pure_row_func):
+    import pandas as pd
     # import __main__
     _local_df = getattr(__main__, LOCAL_DATAFRAME_VARIALBE_NAME)
     batch_df = _local_df.loc[batch_indices]
@@ -75,7 +74,7 @@ class ParallelDataExecutor:
     MODE_MPI = "mpi"
     MODE_SERIAL = "serial"
 
-    def __init__(self, distributed_data: pd.DataFrame, parallel_mode: str = MODE_SERIAL, index_col: str = None,
+    def __init__(self, distributed_data: 'pd.DataFrame', parallel_mode: str = MODE_SERIAL, index_col: str = None,
                  batch_size: int = None, n_workers: int = None):
         self._distributed_df = distributed_data
         if index_col is not None:
@@ -136,6 +135,8 @@ class ParallelDataExecutor:
             self._executor = None
 
     def map(self, pure_row_func=None, wrapped_pure_func=None):
+        import pandas as pd
+
         if self._executor is None:
             self.start_executor()
 

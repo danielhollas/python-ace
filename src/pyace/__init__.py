@@ -17,7 +17,8 @@ from pyace.calculator import ACECalculator
 from pyace.coupling import ACECouplingTree, generate_ms_cg_list, validate_ls_LS, is_valid_ls_LS, expand_ls_LS
 from pyace.evaluator import ACECTildeEvaluator, ACEBEvaluator, get_ace_evaluator_version
 from pyace.pyacefit import PyACEFit
-from pyace.preparedata import *
+# DH: This import introduces pandas
+# from pyace.preparedata import *
 from pyace.radial import RadialFunctionsValues, RadialFunctionsVisualization, RadialFunctionSmoothness
 
 from pyace.multispecies_basisextension import create_multispecies_basis_config
@@ -30,12 +31,9 @@ __all__ = ["ACEAtomicEnvironment", "create_cube", "create_linear_chain", "aseato
            "ACECouplingTree", "generate_ms_cg_list", "validate_ls_LS", "is_valid_ls_LS", 'expand_ls_LS',
            "ACECTildeEvaluator", "ACEBEvaluator",
            "PyACEFit", "PyACECalculator", "PyACEEnsembleCalculator",
-           "StructuresDatasetSpecification", "EnergyBasedWeightingPolicy", "Fexp",
+           "Fexp",
            "get_ace_evaluator_version",
-           "EnergyBasedWeightingPolicy", "UniformWeightingPolicy",
            "RadialFunctionsValues", "RadialFunctionsVisualization", "RadialFunctionSmoothness",
-           "StructuresDatasetSpecification",
-
            "create_multispecies_basis_config",
            ]
 

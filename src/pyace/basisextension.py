@@ -2,7 +2,6 @@ import logging
 from collections import defaultdict
 
 import numpy as np
-import pandas as pd
 from typing import List, Dict, Union
 
 from pyace.basis import ACEBBasisSet, BBasisConfiguration, BBasisFunctionsSpecificationBlock, \

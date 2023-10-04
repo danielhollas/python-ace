@@ -1,7 +1,6 @@
 import logging
 import numpy as np
 import os
-from pyace.preparedata import E_CHULL_DIST_PER_ATOM
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -127,6 +126,8 @@ class FitMetrics:
             self.nfuncs = fit_metrics_dict["nfuncs"]
 
     def compute_metrics(self, de, de_pa, df, nat, dataframe=None, de_low=None):
+        from pyace.preparedata import E_CHULL_DIST_PER_ATOM
+
         if de_low is None:
             de_low = 1.
         self.nat = np.sum(nat)

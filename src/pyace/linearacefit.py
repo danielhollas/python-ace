@@ -5,7 +5,6 @@ from concurrent.futures import ProcessPoolExecutor
 import multiprocessing as mp
 from time import perf_counter
 
-import pandas as pd
 from pyace import ACEBEvaluator, ACECalculator, BBasisConfiguration, ACEBBasisSet
 from pyace.atomicenvironment import aseatoms_to_atomicenvironment
 
@@ -128,7 +127,7 @@ def generate_data(data, basis, shared_design_matrix, structures_chunk, atoms_chu
 
 
 class LinearACEDataset:
-    def __init__(self, bconf_or_bbasis, df):
+    def __init__(self, bconf_or_bbasis, df: 'pd.DataFrame'):
         """
         Representation of a linear ACE dataset, build from a dataframe of atomic environments and a basis set
         :param bconf_or_bbasis: BBasisConfiguration or ACEBBasisSet
@@ -157,7 +156,7 @@ class LinearACEDataset:
 
         self.total_number_of_atoms: int = 0
         self.total_number_of_structures: int = 0
-        self.df: pd.DataFrame = df
+        self.df = df
         if self.df is not None:
             self.prepare_df()
 

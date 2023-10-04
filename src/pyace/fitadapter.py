@@ -1,6 +1,5 @@
 import logging
 import numpy as np
-import pandas as pd
 import warnings
 
 from typing import Dict, Union, Callable
@@ -61,10 +60,10 @@ class FitBackendAdapter:
 
     def fit(self,
             bbasisconfig: BBasisConfiguration,
-            dataframe: pd.DataFrame,
+            dataframe: 'pd.DataFrame',
             loss_spec: LossFunctionSpecification = None,
             fit_config: Dict = None, callback: Callable = None,
-            test_dataframe: pd.DataFrame = None
+            test_dataframe: 'pd.DataFrame' = None
             ) -> BBasisConfiguration:
         if loss_spec is None:
             loss_spec = self.loss_spec
@@ -164,7 +163,7 @@ class FitBackendAdapter:
             log.error(e)
         return {}
 
-    def setup_tensorpot(self, bbasisconfig: BBasisConfiguration, dataframe: pd.DataFrame,
+    def setup_tensorpot(self, bbasisconfig: BBasisConfiguration, dataframe: 'pd.DataFrame',
                         loss_spec: LossFunctionSpecification,
                         trainable_parameters_dict: Dict
                         ) -> BBasisConfiguration:
@@ -214,10 +213,10 @@ class FitBackendAdapter:
             total_number_of_functions = bbasisconfig.total_number_of_functions
             self.fitter.nfuncs = total_number_of_functions
 
-    def run_tensorpot_fit(self, bbasisconfig: BBasisConfiguration, dataframe: pd.DataFrame,
+    def run_tensorpot_fit(self, bbasisconfig: BBasisConfiguration, dataframe: 'pd.DataFrame',
                           loss_spec: LossFunctionSpecification, fit_config: Dict,
                           trainable_parameters_dict: Dict,
-                          test_dataframe: pd.DataFrame = None
+                          test_dataframe: 'pd.DataFrame' = None
                           ) -> BBasisConfiguration:
 
         with warnings.catch_warnings():
@@ -246,7 +245,7 @@ class FitBackendAdapter:
             new_config = self.fitter.tensorpot.potential.get_updated_config(updating_coefs=self.res_opt.x)
             return new_config
 
-    def setup_pyace(self, bbasisconfig: BBasisConfiguration, dataframe: pd.DataFrame,
+    def setup_pyace(self, bbasisconfig: BBasisConfiguration, dataframe: 'pd.DataFrame',
                     loss_spec: LossFunctionSpecification,
                     trainable_parameters_dict: Dict
                     ) -> BBasisConfiguration:
@@ -277,10 +276,10 @@ class FitBackendAdapter:
         total_number_of_functions = bbasisconfig.total_number_of_functions
         self.fitter.nfuncs = total_number_of_functions
 
-    def run_pyace_fit(self, bbasisconfig: BBasisConfiguration, dataframe: pd.DataFrame,
+    def run_pyace_fit(self, bbasisconfig: BBasisConfiguration, dataframe: 'pd.DataFrame',
                       loss_spec: LossFunctionSpecification, fit_config: Dict,
                       trainable_parameters_dict: Dict,
-                      test_dataframe: pd.DataFrame = None
+                      test_dataframe: 'pd.DataFrame' = None
                       ) -> BBasisConfiguration:
         maxiter = fit_config.get(FIT_NITER_KW, 100)
         fit_options = fit_config.get(FIT_OPTIONS_KW, {})

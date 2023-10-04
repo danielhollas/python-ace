@@ -1,6 +1,5 @@
 import numpy as np
 # get everything from atomic environment
-import pandas as pd
 from pyace.catomicenvironment import ACEAtomicEnvironment, get_minimal_nn_distance_tp, build_atomic_env
 from pyace.catomicenvironment import get_nghbrs_tp_atoms
 from pyace.pyneighbor import ACENeighborList
@@ -197,7 +196,7 @@ def generate_tp_atoms(ase_atoms, cutoff=8.7, verbose=False):
         return None
 
 
-def calculate_minimal_nn_distance(df: pd.DataFrame, target_column_name = "min_distance"):
+def calculate_minimal_nn_distance(df: 'pd.DataFrame', target_column_name = "min_distance"):
     if target_column_name in df.columns:
         return
     if "atomic_env" in df.columns:

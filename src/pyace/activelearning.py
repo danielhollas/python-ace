@@ -3,7 +3,6 @@ import os
 
 from collections import Counter, defaultdict
 
-import pandas as pd
 from ase import Atoms
 from ase.io.lammpsrun import read_lammps_dump_text
 from maxvolpy.maxvol import maxvol
@@ -201,6 +200,7 @@ def convert_to_bbasis(bconf):
 
 
 def convert_to_atomic_env_list(atomic_env_list, pot: ACEBBasisSet):
+    import pandas as pd
     elements_mapper_dict = pot.elements_to_index_map
     if isinstance(atomic_env_list, pd.Series):
         atomic_env_list = atomic_env_list.values

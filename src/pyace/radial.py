@@ -6,7 +6,7 @@
 import numpy as np
 from typing import Union
 
-from pyace import ACECTildeBasisSet, ACEBBasisSet, BBasisConfiguration
+from pyace.basis import ACECTildeBasisSet, ACEBBasisSet, BBasisConfiguration
 
 
 def integrate(xs, table):

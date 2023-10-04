@@ -6,7 +6,6 @@ from functools import partial
 from typing import Union, Dict, List, Callable, Tuple
 
 import numpy as np
-import pandas as pd
 
 import pyace
 from pyace.basis import ACEBBasisSet, BBasisConfiguration
@@ -15,7 +14,6 @@ from pyace.multispecies_basisextension import extend_multispecies_basis, expand_
     compute_bbasisset_train_mask, clean_bbasisconfig, reset_bbasisconfig
 from pyace.const import *
 from pyace.fitadapter import FitBackendAdapter
-from pyace.preparedata import get_fitting_dataset, normalize_energy_forces_weights
 from pyace.lossfuncspec import LossFunctionSpecification
 from pyace.metrics_aggregator import MetricsAggregator
 
@@ -88,7 +86,7 @@ def get_initial_potential(start_potential):
     return initial_bbasisconfig
 
 
-def train_test_split(df, test_size: Union[float, int]) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def train_test_split(df, test_size: Union[float, int]) -> Tuple['pd.DataFrame', 'pd.DataFrame']:
     """
     Split df into train and test
     :param df: data frame
@@ -129,12 +127,15 @@ class GeneralACEFit:
     def __init__(self,
                  potential_config: Union[Dict, str, BBasisConfiguration, ACEBBasisSet],
                  fit_config: Dict,
-                 data_config: Union[Dict, pd.DataFrame],
+                 data_config: Union[Dict, 'pd.DataFrame'],
                  backend_config: Dict,
                  cutoff=None,
                  seed=None,
                  callbacks=None
                  ):
+        import pandas as pd
+        from pyace.preparedata import get_fitting_dataset, normalize_energy_forces_weights
+
         self.seed = seed
         if self.seed is not None:
             log.info("Set numpy random seed to {}".format(self.seed))

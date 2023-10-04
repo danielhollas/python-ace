@@ -1,7 +1,6 @@
 import logging
 import numpy as np
 import pickle
-import pkg_resources
 import re
 
 from collections import defaultdict
@@ -9,7 +8,7 @@ from copy import deepcopy
 from itertools import combinations, permutations, combinations_with_replacement, product
 from typing import Dict, List, Union, Tuple
 
-from pyace import BBasisConfiguration, BBasisFunctionSpecification, BBasisFunctionsSpecificationBlock, ACEBBasisSet
+from pyace.basis import BBasisConfiguration, BBasisFunctionSpecification, BBasisFunctionsSpecificationBlock, ACEBBasisSet
 from pyace.basisextension import *
 from pyace.const import *
 
@@ -44,8 +43,10 @@ PERIODIC_ELEMENTS = chemical_symbols = [
     'Rf', 'Db', 'Sg', 'Bh', 'Hs', 'Mt', 'Ds', 'Rg', 'Cn', 'Nh', 'Fl', 'Mc',
     'Lv', 'Ts', 'Og']
 
-default_mus_ns_uni_to_rawlsLS_np_rank_filename = pkg_resources.resource_filename('pyace.data',
-                                                                                 'mus_ns_uni_to_rawlsLS_np_rank.pckl')
+# DH-TODO: This takes ~50ms! Only do when needed!
+# import pkg_resources
+# default_mus_ns_uni_to_rawlsLS_np_rank_filename = pkg_resources.resource_filename('pyace.data',
+#                                                                                 'mus_ns_uni_to_rawlsLS_np_rank.pckl')
 
 def clean_bbasisconfig(initial_bbasisconfig):
     for block in initial_bbasisconfig.funcspecs_blocks:

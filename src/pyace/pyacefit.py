@@ -1,6 +1,5 @@
 import logging
 import numpy as np
-import pandas as pd
 import time
 
 log = logging.getLogger(__name__)
@@ -25,6 +24,8 @@ required_structures_dataframe_columns = [ATOMIC_ENV_COL, ENERGY_CORRECTED_COL, F
 
 
 def batch_compute_energy_forces_function_wrapper(batch_indices, cbasis):
+    import pandas as pd
+
     _local_df = getattr(__main__, LOCAL_DATAFRAME_VARIALBE_NAME)
     batch_df = _local_df.loc[batch_indices]
 
@@ -44,6 +45,8 @@ def batch_compute_energy_forces_function_wrapper(batch_indices, cbasis):
 
 
 def batch_compute_projections_function_wrapper(batch_indices, potential_params):
+    import pandas as pd
+
     _local_df = getattr(__main__, LOCAL_DATAFRAME_VARIALBE_NAME)
     batch_df = _local_df.loc[batch_indices]
 
@@ -86,7 +89,7 @@ class PyACEFit:
     :param loss_spec (LossFunctionSpecification)
     """
 
-    def __init__(self, basis: Union[BBasisConfiguration] = None, structures_dataframe: pd.DataFrame = None,
+    def __init__(self, basis: Union[BBasisConfiguration] = None, structures_dataframe: 'pd.DataFrame' = None,
                  loss_spec: LossFunctionSpecification = None, seed=None, executors_kw_args=None, display_step=10,
                  trainable_parameters=None):
 
@@ -288,6 +291,8 @@ class PyACEFit:
     def predict_energy_forces(self, params=None,
                               structures_dataframe=None,
                               keep_parallel_dataexecutor=False):
+        import pandas as pd
+
         if params is not None:
             if isinstance(params, (list, tuple, np.ndarray)):
                 self.cbasis = self.get_cbasis(params)

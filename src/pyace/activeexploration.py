@@ -3,7 +3,6 @@ from ase.io import write
 from pyace import PyACECalculator
 from scipy.optimize import minimize
 
-from pyace.preparedata import calc_min_distance, aseatoms_to_atomicenvironment
 from pyace.basis import BBasisConfiguration, ACEBBasisSet
 from pyace.activelearning import load_active_inverse_set, compute_active_set, compute_A_active_inverse, \
     compute_B_projections, save_active_inverse_set
@@ -75,6 +74,8 @@ class ActiveExploration:
         self.calc = PyACECalculator(self.bconf)
 
     def obj(self, dpos, atom_ind, orig_structure):
+        from pyace.preparedata import aseatoms_to_atomicenvironment
+
         symbols = self.orig_atoms_.get_chemical_symbols()
         print(" [obj] {}(#{}) dpos=({:>7.3f}, {:>7.3f}, {:>7.3f})".format(symbols[atom_ind], atom_ind, *dpos), end=" ")
         new_atoms = move_atom(dpos, atom_ind=atom_ind, original_structure=orig_structure)
